@@ -10,28 +10,16 @@ from multiprocessing import Process
 from functools import partial
 import time
 
-
-
-#Show Metrics' List
 def f(i, args, vid, metric, model):
-
-    #model = models[metric]
     score, time = model.predict(**args)
     print(score, time)
     with open(f'res/{i}.txt', 'w') as f:
         f.write(f'{vid}\n{metric}\n{score}\n{time}')
 if __name__ == '__main__':
-    print(list(beautify_dict.beautify_dict.keys()))
-    
+    # List the metrics
     metrics = ['mse', 'psnr', 'ne', 'erqa_torch', 'dbcnn' , 'clipiqa+', 'hyperiqa', 'lpips_vgg']
     models = {metric : Metric(metric, "cuda:0" if metric not in ('mse', 'psnr', 'ne') else None) for metric in metrics}
-
     
-    
-    
-
-        
-        
     with open('GTclusters.json') as json_data:
         l = json.load(json_data)
     proc = []
@@ -66,29 +54,7 @@ if __name__ == '__main__':
                     proc.append(p)
                     while len(proc := [p for p in proc if p.is_alive()]) >= 8:
                         time.sleep(0.1)
-                    #score, time = model.predict(dist_frames_path=dist_path, gt_frames_path=gt_path)
-                    
                     
                     i += 1
-    '''
-    metric_name = ""
-    device = "cuda:0"
-    
-    gt_path = "gt_video.mp4"
-    sample_path = "sample_video.mp4"
-    
-    # No-Reference Metric
-    estimator_nr = Metric("q-align_iqa", "cuda:0")
-    score, time = estimator_nr.predict(dist_video_path=sample_path)
-    print(f'Score of {estimator_nr.full_metric_name} is {score}')
-    
-    # Full-Reference Metric
-    estimator_fr = Metric("topiq_fr", "cuda:1")
-    score, time = estimator_fr.predict(dist_video_path=sample_path, gt_video_path=gt_path)
-    print(f'Score of {estimator_fr.full_metric_name} is {score}')
-    
-    # Metric with path to Frames
-    sample_frames_path = './frames/'
-    score, time = estimator_nr.predict(dist_frames_path=sample_frames_path)
     print(f'Score of {estimator_fr.full_metric_name} is {score}')
     '''
