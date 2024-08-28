@@ -57,4 +57,3 @@ if __name__ == '__main__':
                     
                     i += 1
     print(f'Score of {estimator_fr.full_metric_name} is {score}')
-    '''
