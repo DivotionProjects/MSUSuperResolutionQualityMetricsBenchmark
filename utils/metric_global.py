@@ -185,4 +185,3 @@ class Metric():
                 self.last_frames_cnt = pyiqa_preprocess(self.metric_type, tmp_video, tmp_dir1, tmp_dir2, resolution, dist_video_path, gt_video_path, dist_frames_path, gt_frames_path)
             return calc_erqa_torch_metric(self.model, self.device, self.last_frames_cnt, tmp_dir1, tmp_dir2)
         '''
-

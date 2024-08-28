@@ -9,7 +9,7 @@ scipy
 python-highcharts
 imageio
 gdown
-skvideo
+sk-video
 pillow
 moviepy
 functools
